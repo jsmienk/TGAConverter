@@ -62,19 +62,11 @@ public class Main {
                         // If it is not a directory
                         if (file.isFile()) {
                             final String fileName = file.getName().substring(0, file.getName().length() - INPUT_EXTENSION.length());
-//                            System.out.println("File found: " + fileName);
-//                            System.out.println("File path: " + file.getAbsolutePath());
-
                             final String targetFileName = OUTPUT_PREFIX + fileName + OUTPUT_EXTENSION;
                             final String targetPath = targetFolder.getAbsolutePath() + "/" + targetFileName;
-//                            System.out.println("Target file name: " + targetFileName);
-//                            System.out.println("Target file path: " + targetPath);
-
                             try {
                                 boolean result = convertFormat(file.getAbsolutePath(), targetPath, OUTPUT_FORMAT);
-                                if (result) {
-//                                    System.out.println("Image converted successfully.");
-                                } else {
+                                if (!result) {
                                     System.err.println("Could not convert image!");
                                 }
                             } catch (IOException ex) {
@@ -107,8 +99,6 @@ public class Main {
      * @throws IOException if errors occur during writing
      */
     private static boolean convertFormat(String inputImagePath, String outputImagePath, String formatName) throws IOException {
-//        System.out.println("Converting...");
-
         boolean result = false;
         try (final FileInputStream inputStream = new FileInputStream(inputImagePath)) {
             try (final FileOutputStream outputStream = new FileOutputStream(outputImagePath)) {
